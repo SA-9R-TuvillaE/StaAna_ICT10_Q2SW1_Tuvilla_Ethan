@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Candidate Verification System</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=MedievalSharp&display=swap">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet"
+          href="https://pyscript.net/releases/2024.11.1/core.css">
+    <script type="module"
+            src="https://pyscript.net/releases/2024.11.1/core.js"></script>
+
+    <style>
+        :root {
+            --bg: #e6d3a0;
+            --bg-light: #f3e7c4;
+            --bg-dark: #cfb67a;
+            --card: #f8efd5;
+            --text: #3b2a1a;
+            --muted: #7a6347;
+            --blue: #7b2d26;
+            --blue-dark: #5c1f1a;
+            --border: #b89a5c;
+            --gold: #b8923b;
+            --result-bg: #f1e4bd;
+            --result-text: #3b2a1a;
+            --highlight: #e8d49a;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: var(--bg);
+            background-image: radial-gradient(ellipse at center,
+                              var(--bg-light) 0%, var(--bg) 60%,
+                              var(--bg-dark) 100%);
+            background-attachment: fixed;
+            color: var(--text);
+            font-family: "IM Fell English", Georgia, "Times New Roman", serif;
+            font-size: 1.1rem;
+        }
+
+        .page-box {
+            max-width: 640px;
+        }
+
+        .card-panel {
+            background-color: var(--card);
+            border: 4px double #8a6a35;
+            border-radius: 4px;
+            padding: 28px;
+            box-shadow: 0 6px 20px rgba(60, 40, 15, 0.30),
+                        inset 0 0 36px rgba(160, 120, 50, 0.22);
+        }
+
+        h1 {
+            color: var(--blue);
+            font-family: "MedievalSharp", "IM Fell English", Georgia, serif;
+            font-weight: 400;
+            line-height: 1.35;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .subtitle {
+            color: var(--muted);
+            font-size: 1rem;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .form-label {
+            color: var(--blue-dark);
+            font-weight: 400 !important;
+            font-size: 1.1rem;
+        }
+
+        .form-control {
+            background-color: #fdf7e4;
+            color: var(--text);
+            border: 2px solid var(--border);
+            border-radius: 2px;
+            padding: 10px 12px;
+            font-family: "IM Fell English", Georgia, serif;
+            font-size: 1.05rem;
+        }
+
+        .form-control::placeholder {
+            color: #9c855d;
+            font-style: italic;
+        }
+
+        .form-control:focus {
+            background-color: #fffaeb;
+            color: var(--text);
+            border-color: var(--blue);
+            box-shadow: 0 0 0 0.2rem rgba(123, 45, 38, 0.20);
+        }
+
+        .btn-blue {
+            background-color: var(--blue);
+            border: 2px solid var(--gold);
+            color: #f8efd5;
+            border-radius: 2px;
+            padding: 8px 26px;
+            font-family: "MedievalSharp", "IM Fell English", Georgia, serif;
+            font-size: 1.05rem;
+            letter-spacing: 0.06em;
+            box-shadow: 0 2px 6px rgba(60, 40, 15, 0.35);
+        }
+
+        .btn-blue:hover,
+        .btn-blue:focus,
+        .btn-blue:active {
+            background-color: var(--blue-dark);
+            border-color: var(--gold);
+            color: #fff6dc;
+        }
+
+        #output {
+            background-color: var(--result-bg);
+            color: var(--result-text);
+            border: 1px solid var(--border);
+            border-left: 5px solid var(--blue);
+            border-radius: 2px;
+            padding: 16px 20px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        .members-title {
+            display: inline-block;
+            background-color: var(--highlight);
+            color: var(--blue-dark);
+            font-weight: 700;
+            font-size: 1.05rem;
+            padding: 2px 10px;
+            border-radius: 2px;
+            margin-bottom: 6px;
+        }
+
+        .members-total {
+            display: inline-block;
+            background-color: var(--highlight);
+            color: var(--blue-dark);
+            font-weight: 700;
+            font-size: 1.05rem;
+            padding: 2px 10px;
+            border-radius: 2px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container page-box py-5">
+
+        <div class="card-panel mb-4">
+            <h1 class="h4 mb-1">Machinery of Judgement of thy Presence in thee Order of Holy Knights</h1>
+            <p class="subtitle mb-4">Verification of the Holy Knights in thee Order</p>
+
+            <label class="form-label fw-semibold">Enter thy title given unto thee from birth onto the Kingdom:</label>
+
+            <input type="text" id="first-name" class="form-control mb-2"
+                   placeholder="First name (e.g John)">
+
+            <input type="text" id="last-name" class="form-control mb-3"
+                   placeholder="Last name (e.g. Python)">
+
+            <button type="button" id="submit-btn" class="btn btn-blue">
+                I pledge
+            </button>
+        </div>
+
+        <div class="card-panel">
+            <div id="output"></div>
+        </div>
+    </div>
+
+    <script type="py" src="./main.py"></script>
+</body>
+</html>
